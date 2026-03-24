@@ -3,6 +3,8 @@
 Kafka Cluster Testing is distributed through the project website:
 - https://kafkakombat.com/kafka-cluster-testing
 
+Supported Apache Kafka versions: `3.0.0` through `4.2.0`.
+
 ## Minimal configuration idea
 
 For most runs, the essential parameters are:
@@ -19,6 +21,8 @@ For most runs, the essential parameters are:
 ## Report format
 
 The utility produces a human-readable final report. Example:
+
+![Kafka Cluster Testing report example](img/protocol.png)
 
 ```text
 ====================================================================
