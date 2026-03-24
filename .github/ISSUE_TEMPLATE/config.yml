@@ -1,5 +1,5 @@
-blank_issues_enabled: true
+blank_issues_enabled: false
 contact_links:
   - name: Project website
     url: https://kafkakombat.com/kafka-cluster-testing
-    about: Public project page and release references for Kafka Cluster Testing.
+    about: Public project page, documentation, and release references for Kafka Cluster Testing
