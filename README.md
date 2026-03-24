@@ -4,6 +4,8 @@ Kafka Cluster Testing is a standalone CLI utility for deterministic engineering 
 
 It is a smoke-test utility for cluster readiness and operational verification. It is not a monitoring platform and it is not a load-testing tool.
 
+Supported Apache Kafka versions: `3.0.0` through `4.2.0`.
+
 Project page:
 - https://kafkakombat.com/kafka-cluster-testing
 
@@ -103,6 +105,8 @@ The shell exit code matches the report and JSON result.
 ## Example report
 
 Below is a public example of the final protocol produced by the utility. Real hostnames were replaced with `example.com` values.
+
+![Kafka Cluster Testing report example](docs/img/protocol.png)
 
 ```text
 ====================================================================
